@@ -25,6 +25,7 @@ exchangeBtn.addEventListener("click", (e) => {
     let to = toCurrency.value
     toCurrency.value = fromCurrency.value
     fromCurrency.value = to
+    
 })
 
 convertButton.addEventListener('click', (e) => {
@@ -43,9 +44,24 @@ convertButton.addEventListener('click', (e) => {
         return;
     }
 
-    const changeCurrency = (input / currencyData[selectOne]) * currencyData[selectTwo]
+    rateOne = currencyData[selectOne];
+    rateTwo = currencyData[selectTwo]
+
+    if (rateOne == undefined || rateTwo == undefined) {
+        alert("Selected currency is not valid.");
+        amount.value = '';
+        fromCurrency.value = '';
+        toCurrency.value = '';
+        return;
+    }
+
+    const changeCurrency = (input / rateOne) * rateTwo
     rate.innerHTML = +changeCurrency.toFixed(2)
     console.log(changeCurrency);
+
+    amount.value = '';
+    fromCurrency.value = '';
+    toCurrency.value = '';
 
 })
 
